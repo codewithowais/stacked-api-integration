@@ -1,5 +1,39 @@
+// import 'package:flutter/material.dart';
+// import "package:learn_api_integration/app/app.router.dart";
+// import "package:learn_api_integration/screens/home/home_viewmodel.dart";
+// import "package:stacked/stacked.dart";
+
+// class HomeScreen extends StatelessWidget {
+//   const HomeScreen({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return ViewModelBuilder.reactive(
+//       viewModelBuilder: () => HomeViewModel(),
+//       builder: (context, viewmodell, child) {
+//         return Scaffold(
+//             appBar: AppBar(
+//               backgroundColor: Colors.blue,
+//             ),
+//             body: FutureBuilder(
+//               future: viewmodell.apiService.getUsersData(),
+//               builder: (context, AsyncSnapshot snapShot) {
+//                 return ListView.builder(
+//                   itemCount: viewmodell.users.length,
+//                   itemBuilder: (context, index) {
+//                     return Text("${viewmodell.users[index]['name']}");
+//                   },
+//                 );
+//               },
+//             ));
+//       },
+//     );
+//   }
+// }
+
 import 'package:flutter/material.dart';
 import "package:learn_api_integration/app/app.router.dart";
+import "package:learn_api_integration/models/user_model.dart";
 import "package:learn_api_integration/screens/home/home_viewmodel.dart";
 import "package:stacked/stacked.dart";
 
@@ -9,6 +43,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
+      onViewModelReady: (viewModel) => viewModel.initialize(),
       viewModelBuilder: () => HomeViewModel(),
       builder: (context, viewmodell, child) {
         return Scaffold(
@@ -43,7 +78,8 @@ class HomeScreen extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: viewmodell.users.length,
                   itemBuilder: (context, index) {
-                    return Text("${viewmodell.users[index]['name']}");
+                    // UserModel user = viewmodell.users[index];
+                    return Text("${viewmodell.users[index].name}");
                   },
                 ),
               ),
